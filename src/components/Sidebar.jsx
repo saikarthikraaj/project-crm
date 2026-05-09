@@ -2,56 +2,83 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NAV = [
-  { to: "/",          label: "📊  Dashboard"  },
-  { to: "/contacts",  label: "👥  Contacts"   },
-  { to: "/companies", label: "🏢  Companies"  },
-  { to: "/audit",     label: "📋  Audit Log"  },
-  { to: "/sync",      label: "🔄  Sync"       },
-  { to: "/reports",   label: "📈  Reports"    },
+  { to:"/",          icon:"📊", label:"Dashboard"  },
+  { to:"/contacts",  icon:"👥", label:"Contacts"   },
+  { to:"/companies", icon:"🏢", label:"Companies"  },
+  { to:"/audit",     icon:"📋", label:"Audit Log"  },
+  { to:"/sync",      icon:"🔄", label:"Sync"       },
+  { to:"/reports",   icon:"📈", label:"Reports"    },
 ];
 
 export default function Sidebar() {
   return (
     <aside style={{
-      width: 220,
+      width: 240,
       minHeight: "100vh",
-      background: "#0f172a",
+      background: "#ffffff",
+      borderRight: "1.5px solid #e2e8f0",
       display: "flex",
       flexDirection: "column",
       position: "fixed",
       top: 0, left: 0,
       zIndex: 100,
+      boxShadow: "4px 0 24px rgba(99,102,241,0.06)",
     }}>
-      <div style={{ padding: "24px 22px 20px", borderBottom: "1px solid #1e293b" }}>
-        <div style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>
-          Zoho <span style={{ color: "#38bdf8" }}>CRM</span>
+      <div style={{ padding:"28px 22px 22px", borderBottom:"1.5px solid #f1f5f9" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+          <div style={{
+            width:38, height:38, borderRadius:12,
+            background:"linear-gradient(135deg, #6366f1, #8b5cf6)",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            fontSize:18, fontWeight:800, color:"#fff",
+            boxShadow:"0 4px 12px rgba(99,102,241,0.35)",
+          }}>Z</div>
+          <div>
+            <div style={{ fontSize:16, fontWeight:800, color:"#0f172a" }}>
+              Zoho<span style={{ color:"#6366f1" }}>CRM</span>
+            </div>
+            <div style={{ fontSize:10, color:"#94a3b8", letterSpacing:"0.06em", textTransform:"uppercase" }}>Outreach Suite</div>
+          </div>
         </div>
-        <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>Outreach Manager</div>
       </div>
-      <nav style={{ padding: "12px 0", flex: 1 }}>
-        {NAV.map((item) => (
+
+      <nav style={{ padding:"14px 12px", flex:1, display:"flex", flexDirection:"column", gap:3 }}>
+        {NAV.map(item => (
           <NavLink
             key={item.to}
             to={item.to}
             end={item.to === "/"}
             style={({ isActive }) => ({
-              display: "block",
-              padding: "11px 22px",
-              fontSize: 13,
-              fontWeight: 600,
-              color: isActive ? "#38bdf8" : "#94a3b8",
-              background: isActive ? "#1e3a5f" : "transparent",
-              borderLeft: isActive ? "3px solid #38bdf8" : "3px solid transparent",
-              textDecoration: "none",
+              display:"flex", alignItems:"center", gap:11,
+              padding:"11px 14px", borderRadius:12,
+              fontSize:13.5, fontWeight: isActive ? 700 : 500,
+              color: isActive ? "#6366f1" : "#64748b",
+              background: isActive ? "linear-gradient(135deg, #eef2ff, #ede9fe)" : "transparent",
+              boxShadow: isActive ? "0 2px 8px rgba(99,102,241,0.15)" : "none",
+              border: isActive ? "1.5px solid #c7d2fe" : "1.5px solid transparent",
+              textDecoration:"none",
+              transition:"all 0.18s ease",
             })}
           >
+            <span style={{ fontSize:16 }}>{item.icon}</span>
             {item.label}
           </NavLink>
         ))}
       </nav>
-      <div style={{ padding: "16px 22px", borderTop: "1px solid #1e293b" }}>
-        <div style={{ fontSize: 11, color: "#334155" }}>Logged in as</div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#94a3b8", marginTop: 2 }}>admin</div>
+
+      <div style={{ padding:"16px 20px", borderTop:"1.5px solid #f1f5f9" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+          <div style={{
+            width:34, height:34, borderRadius:"50%",
+            background:"linear-gradient(135deg, #6366f1, #8b5cf6)",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            fontSize:14, fontWeight:700, color:"#fff",
+          }}>A</div>
+          <div>
+            <div style={{ fontSize:13, fontWeight:600, color:"#0f172a" }}>Admin User</div>
+            <div style={{ fontSize:11, color:"#94a3b8" }}>admin@zohocrm.io</div>
+          </div>
+        </div>
       </div>
     </aside>
   );
